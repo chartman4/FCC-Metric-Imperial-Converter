@@ -17,34 +17,52 @@ suite('Unit Tests', function(){
   suite('Function convertHandler.getNum(input)', function() {
     
     test('Whole number input', function(done) {
+      console.log("unit test called");
+      console.log(convertHandler.getNum(input));
+       chai.request(server)             // 'server' is the Express App
+          .get('/hello?name=Cheryl') /** <=== Put your name in the query **/ 
+          .end(function(err, res){        // res is the response object
+          
+            // Your tests here.
+            // Replace assert.fail(). Make the test pass.
+            // Test the status and the text response. Follow the test order like above.
+            assert.equal(res.status, 200);
+            assert.equal(res.text, 'hello Cheryl');
+            done();   // Always call the 'done()' callback when finished.
+          });
       var input = '32L';
-      assert.equal(convertHandler.getNum(input),32);
-      done();
+      assert.equal(convertHandler.getNum(input),32,'getNum Whole number input should pass');
+      // done();
     });
     
     test('Decimal Input', function(done) {
-      
-      //done();
+       var input = '3.2L';
+      assert.equal(convertHandler.getNum(input),3.2,'getNum Decimal number input should pass');
+      // done();
     });
     
     test('Fractional Input', function(done) {
-      
-      //done();
+       var input = '1/2L';
+      assert.equal(convertHandler.getNum(input),.5,'getNum Decimal number input should pass');
+      // done();
     });
     
     test('Fractional Input w/ Decimal', function(done) {
-      
-      //done();
+       var input = '4/0.5L';
+      assert.equal(convertHandler.getNum(input),8,'getNum Fractional number input should pass');
+      // done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+       var input = '3/2/1L';
+      assert.equal(convertHandler.getNum(input),'invalid number','getNum Invalid number input should return invalid number');
+      // done();
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+       var input = 'L';
+      assert.equal(convertHandler.getNum(input),'invalid number','getNum No Numerical number input should should return invalid number');
+      // done();
     }); 
     
   });
