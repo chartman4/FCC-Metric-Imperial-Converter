@@ -10,19 +10,20 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     console.log("getnum");
+    console.log(input);
     var temp = input.split(/([0-9.\/]*)([a-z]*)/gi).filter(s=> s.length>0);
     var result;
     var ck = temp[0].split("/");
     if (ck.length > 1) {
       result = parseFloat(ck[0]) / parseFloat(ck[1]);
     } else {
-      result=parseFloat(temp[0]);
+      result=parseFloat(ck[0]);
     };
     if (isNaN(result) && ck.length === 1) result=1;
 
     if (isNaN(result) || ck.length > 2) result="invalid number";
 
-
+console.log("getNum result:");
     console.log(result);
     return result;
   };
@@ -68,7 +69,7 @@ function ConvertHandler() {
       case "gal" : result="gallons";break;
       case "l": result="liters";break;
       case "mi": result="miles";break;
-      case "km": result="kilometer";break;
+      case "km": result="kilometers";break;
       case "kg": result="kilograms";break;
       case "lbs": result="pounds";break;
       default: result='invalid unit';
