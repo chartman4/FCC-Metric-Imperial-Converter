@@ -9,8 +9,6 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    console.log("getnum");
-    console.log(input);
     var temp = input.split(/([0-9.\/]*)([a-z]*)/gi).filter(s=> s.length>0);
     var result;
     var ck = temp[0].split("/");
@@ -23,8 +21,6 @@ function ConvertHandler() {
 
     if (isNaN(result) || ck.length > 2) result="invalid number";
 
-console.log("getNum result:");
-    console.log(result);
     return result;
   };
   
@@ -49,7 +45,6 @@ console.log("getNum result:");
   
   this.getReturnUnit = function(initUnit) {
     var result;
-    console.log(initUnit);
     switch(initUnit.toLowerCase()) {
       case "l": result ="gal";break;
       case "gal": result ="L" ;break;
@@ -92,7 +87,6 @@ console.log("getNum result:");
       case 'km': result = initNum * 1/miToKm;break;
       default: result='invalid unit';
     }
-    console.log(result);
     return Number(Math.round(result+'e5')+'e-5');
   };
   
