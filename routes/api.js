@@ -20,18 +20,14 @@ module.exports = function (app) {
     .get(function (req, res){
       var input = req.query.input;
       var initNum = convertHandler.getNum(input);
-    console.log(initNum);
       var initUnit = convertHandler.getUnit(input);
-    console.log(initUnit);
     var results;
     if ((initNum === "invalid number") && (initUnit === "invalid unit")) results = "invalid number and unit";
     else if (initNum === "invalid number") results = "invalid number";
     else if (initUnit === "invalid unit") results = "invalid unit";
     else {
       var returnNum = convertHandler.convert(initNum, initUnit);
-    console.log(returnNum);
       var returnUnit = convertHandler.getReturnUnit(initUnit);
-        console.log(returnUnit);
 
       var toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 //     '{initNum: 5, initUnit: gal, returnNum: 18.92705, returnUnit: l, string: 5 gallons converts to 18.92705 liters }' 
