@@ -34,27 +34,59 @@ suite('Functional Tests', function() {
       });
       
       test('Convert 32g (invalid input unit)', function(done) {
-        
-        //done();
+         chai.request(server)
+        .get('/api/convert')
+        .query({input: '32g'})
+        .end(function(err, res){
+          assert.equal(res.status, 200);
+          assert.equal(res.text, '"invalid unit"');
+
+          done();
+        });
       });
       
       test('Convert 3/7.2/4kg (invalid number)', function(done) {
-        
-        //done();
+        chai.request(server)
+        .get('/api/convert')
+        .query({input: '3/7.2/4kg'})
+      .end(function(err, res){
+          assert.equal(res.status, 200);
+          assert.equal(res.text, '"invalid number"');
+          done(); 
+        });
       });  
       
       test('Convert 3/7.2/4kilomegagram (invalid number and unit)', function(done) {
-        
-        //done();
+         chai.request(server)
+        .get('/api/convert')
+        .query({input: '3/7.2/4kilomegagram'})
+      .end(function(err, res){
+          assert.equal(res.status, 200);
+          assert.equal(res.text, '"invalid number and unit"');
+          done();
+        });
       });
       
       test('Convert kg (no number)', function(done) {
-        
-        //done();
+        chai.request(server)
+        .get('/api/convert')
+        .query({input: 'mi'})
+      .end(function(err, res){
+// {"initNum":1,"initUnit":"mi","returnNum":1.60934,"returnUnit":"km","string":"1 miles converts to 1.60934 kilometers"}
+// console.log(res);
+//           console.log("RESULT");
+          assert.equal(res.status, 200);
+          assert.equal(res.body.initNum, 1);
+          assert.equal(res.body.initUnit, 'mi');
+          assert.approximately(res.body.returnNum, 1.60934, 0.1);
+          assert.equal(res.body.returnUnit, 'km');
+          done();
       });
       
     });
 
   });
 
+});
+  
 });
